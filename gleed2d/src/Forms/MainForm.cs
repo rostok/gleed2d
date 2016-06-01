@@ -22,6 +22,7 @@ namespace GLEED2D
     {
         public static MainForm Instance;
         String levelfilename;
+        FileSystemWatcher watcher = null;
         //BackgroundWorker bgw = new BackgroundWorker();
 
 
@@ -844,9 +845,6 @@ namespace GLEED2D
             return newname;
         }
 
-
-
-
         public void loadfolder(string path)
         {
             //loadfolder_background(path);
@@ -855,9 +853,41 @@ namespace GLEED2D
 
         Boolean loadFolderWorking = false;
 
+        public static Image FromFile(string path)
+        {
+            var bytes = File.ReadAllBytes(path);
+            var ms = new MemoryStream(bytes);
+            var img = Image.FromStream(ms);
+            return img;
+        }
+
+        public void resetWatcher(string path)
+        {
+            if (watcher == null)
+            {
+                watcher = new FileSystemWatcher(path);
+                watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                watcher.Filter = "*.*";
+                watcher.Changed += new FileSystemEventHandler(wacherOnChangeHandler);
+                watcher.Created += new FileSystemEventHandler(wacherOnChangeHandler);
+                watcher.Deleted += new FileSystemEventHandler(wacherOnChangeHandler);
+                watcher.Renamed += new RenamedEventHandler(wacherOnChangeHandler);
+                watcher.SynchronizingObject = this;
+            }
+            watcher.Path = path;
+            watcher.EnableRaisingEvents = true;
+        }
+
+        public void wacherOnChangeHandler(object source, FileSystemEventArgs e)
+        {
+            loadfolder_foreground(watcher.Path);
+            TextureLoader.Instance.reload(e.FullPath);
+        }
+
         public void loadfolder_foreground(string path)
         {
             if (loadFolderWorking) return;
+            resetWatcher(path);
             loadFolderWorking = true;
 
             imageList48.Images.Clear();
@@ -897,7 +927,7 @@ namespace GLEED2D
 
             foreach (FileInfo file in files)
             {
-                Bitmap bmp = new Bitmap(file.FullName);
+                Bitmap bmp = new Bitmap(FromFile(file.FullName));
                 imageList48.Images.Add(file.FullName, getThumbNail(bmp, 48, 48));
                 imageList64.Images.Add(file.FullName, getThumbNail(bmp, 64, 64));
                 imageList96.Images.Add(file.FullName, getThumbNail(bmp, 96, 96));

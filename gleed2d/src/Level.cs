@@ -137,7 +137,6 @@ namespace GLEED2D
 
     }
 
-
     [XmlInclude(typeof(TextureItem))]
     [XmlInclude(typeof(RectangleItem))]
     [XmlInclude(typeof(CircleItem))]

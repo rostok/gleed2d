@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.Diagnostics;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace GLEED2D
 {
@@ -20,12 +19,11 @@ namespace GLEED2D
             }
         }
 
-        Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
-
-
+        public Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
 
         public Texture2D FromFile(GraphicsDevice gd, string filename)
         {
+            filename = filename.Replace("\\\\", "\\");
             if (!textures.ContainsKey(filename))
             {
                 FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -33,6 +31,19 @@ namespace GLEED2D
                 stream.Close();
             }
             return textures[filename];
+        }
+
+        public void reload(string filename)
+        {
+            if (textures.ContainsKey(filename))
+            {
+                FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                Texture2D newtext = Texture2D.FromStream(textures[filename].GraphicsDevice, stream);
+                Color[] data = new Color[newtext.Width*newtext.Height];
+                newtext.GetData<Color>(data);
+                textures[filename].SetData<Color>(data);
+                stream.Close();
+            }
         }
 
         public void Clear()

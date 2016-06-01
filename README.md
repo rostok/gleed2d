@@ -8,6 +8,7 @@ Microsoft Public License
 https://gleed2d.codeplex.com/
 
 # Custom Changes
+* 1.3.0.10 - watch folder for texture changes and reload textures if necessary, stop files locking
 * 1.3.0.9 - add custom property to selected objects switch
 * 1.3.0.8 - vs2015, doubled files & folders fix
 * 1.3.0.7 - entering folder in textfield
