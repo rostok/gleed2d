@@ -30,10 +30,11 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.3.0.8")]
+[assembly: AssemblyVersion("1.3.0.9")]
 
 /*
  * rostok's changes
+ * 1.3.0.9 - add custom property to selected objects switch
  * 1.3.0.8 - vs2015, doubled files & folders fix
  * 1.3.0.7 - entering folder in textfield
  * 1.3.0.6 - default "Extra" string custom property for each new Item

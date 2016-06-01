@@ -26,5 +26,10 @@ namespace GLEED2D
         {
             System.Diagnostics.Process.Start("http://gleed2d.codeplex.com");
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/rostok/gleed2d");
+        }
     }
 }

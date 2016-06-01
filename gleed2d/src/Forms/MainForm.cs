@@ -493,9 +493,9 @@ namespace GLEED2D
                     "This file was created with a version of GLEED2D less than 1.3.\n" +
                     "In version 1.3 the datatype of 'Scale' changed from 'float' to 'Vector2'.\n" +
                     "The file you tried to open should therefore be converted accordingly.\n" +
-                    "GLEED2D can do that automatically for you.\n\n"+
-                    "(Basically, all that's done is convert \n"+
-                    "<Scale>1.234</Scale> to \n"+
+                    "GLEED2D can do that automatically for you.\n\n" +
+                    "(Basically, all that's done is convert \n" +
+                    "<Scale>1.234</Scale> to \n" +
                     "<Scale><X>1.234</X><Y>1.234</Y></Scale>)\n\n" +
                     "Do you want the file to be converted before opening?",
                     "Convert?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -591,7 +591,7 @@ namespace GLEED2D
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 saveLevel(dialog.FileName);
-               // Constants.Instance.export(Path.GetDirectoryName(dialog.FileName) , "settings.xml");
+                // Constants.Instance.export(Path.GetDirectoryName(dialog.FileName) , "settings.xml");
             }
         }
         private void FileExit(object sender, EventArgs e)
@@ -621,8 +621,8 @@ namespace GLEED2D
             toolStripStatusLabel1.Text = zoomcombo.SelectedText;
             if (zoomcombo.Text.Length > 0 && Editor.Instance != null)
             {
-                float zoom = float.Parse(zoomcombo.Text.Replace("%",""));
-                if (!float.IsNaN(zoom) && zoom!=0) Editor.Instance.camera.Scale = zoom / 100;
+                float zoom = float.Parse(zoomcombo.Text.Replace("%", ""));
+                if (!float.IsNaN(zoom) && zoom != 0) Editor.Instance.camera.Scale = zoom / 100;
             }
         }
 
@@ -826,7 +826,7 @@ namespace GLEED2D
         }
 
 
-       
+
 
 
 
@@ -835,9 +835,9 @@ namespace GLEED2D
 
         public string getUniqueNameBasedOn(string name)
         {
-            int i=0;
+            int i = 0;
             string newname = "Copy of " + name;
-            while (treeView1.Nodes.Find(newname, true).Length>0) 
+            while (treeView1.Nodes.Find(newname, true).Length > 0)
             {
                 newname = "Copy(" + i++.ToString() + ") of " + name;
             }
@@ -981,12 +981,12 @@ namespace GLEED2D
         {
             Constants.Instance.ShowGrid = ShowGridButton.Checked = ViewGrid.Checked;
         }
-        
+
         private void ViewWorldOrigin_CheckedChanged(object sender, EventArgs e)
         {
             Constants.Instance.ShowWorldOrigin = ShowWorldOriginButton.Checked = ViewWorldOrigin.Checked;
         }
-        
+
         private void ShowGridButton_CheckedChanged(object sender, EventArgs e)
         {
             Constants.Instance.ShowGrid = ViewGrid.Checked = ShowGridButton.Checked;
@@ -999,7 +999,7 @@ namespace GLEED2D
 
         private void SnapToGridButton_CheckedChanged(object sender, EventArgs e)
         {
-            Constants.Instance.SnapToGrid =  ViewSnapToGrid.Checked = SnapToGridButton.Checked;
+            Constants.Instance.SnapToGrid = ViewSnapToGrid.Checked = SnapToGridButton.Checked;
         }
 
         private void ViewSnapToGrid_CheckedChanged(object sender, EventArgs e)
@@ -1049,6 +1049,27 @@ namespace GLEED2D
             textBox1.TextChanged -= textBox1_TextChanged;
             loadfolder(textBox1.Text);
             textBox1.TextChanged += textBox1_TextChanged;
+        }
+
+        private void customPropertyAddButton_Click(object sender, EventArgs e)
+        {
+            if (Editor.Instance.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("select some items first");
+                return;
+            }
+            SerializableDictionary props = new SerializableDictionary();
+            AddCustomProperty form = new AddCustomProperty(props);
+            form.ShowDialog();
+
+            foreach (String key in props.Keys)
+            {
+                CustomProperty cp = props[key];
+                foreach (Item selitem in Editor.Instance.SelectedItems)
+                {
+                    selitem.CustomProperties.Add(key, cp.clone());
+                }
+            }
         }
     }
 }

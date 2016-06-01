@@ -108,6 +108,7 @@
     <Content Include="Game.ico" />
     <Content Include="Game.png" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Resources\addcustomproperty.bmp" />
     <EmbeddedResource Include="Resources\circle.png" />
     <EmbeddedResource Include="Resources\folder.png" />
     <EmbeddedResource Include="Resources\icon_circle_item.png" />
@@ -122,7 +123,6 @@
     <EmbeddedResource Include="Resources\cursors\rotate.cur" />
     <EmbeddedResource Include="Resources\cursors\scale.cur" />
     <EmbeddedResource Include="Resources\cursors\dragcopy.cur" />
-    <Content Include="rostok-improvements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,7 +216,10 @@
     <Compile Include="src\Vertices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\CustomUITypeEditors\ItemSelector.resx">
       <DependentUpon>ItemSelector.cs</DependentUpon>
     </EmbeddedResource>
