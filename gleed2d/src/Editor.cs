@@ -547,7 +547,8 @@ namespace GLEED2D
                 if (nodes.Length > 0)
                 {
                     List<Item> selecteditemscopy = new List<Item>(SelectedItems);
-                    MainForm.Instance.propertyGrid1.SelectedObject = SelectedItems[0];
+                    // MainForm.Instance.propertyGrid1.SelectedObject = SelectedItems[0]; // old code, just first item
+                    MainForm.Instance.propertyGrid1.SelectedObjects = SelectedItems.ToArray(); // new code, allows change for multiple selected items
                     MainForm.Instance.treeView1.SelectedNode = nodes[0];
                     MainForm.Instance.treeView1.SelectedNode.EnsureVisible();
                     SelectedItems = selecteditemscopy;
