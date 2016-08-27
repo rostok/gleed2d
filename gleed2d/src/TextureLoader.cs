@@ -35,6 +35,7 @@ namespace GLEED2D
 
         public void reload(string filename)
         {
+            filename = filename.Replace("\\\\", "\\");
             if (textures.ContainsKey(filename))
             {
                 FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

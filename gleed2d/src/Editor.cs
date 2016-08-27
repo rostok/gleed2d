@@ -831,6 +831,14 @@ namespace GLEED2D
                     }
                 }
 
+                if ((mstate.LeftButton == ButtonState.Pressed && oldmstate.LeftButton == ButtonState.Released) && kstate.IsKeyDown(Keys.Space))
+                {
+                    grabbedpoint = new Vector2(mstate.X, mstate.Y);
+                    initialcampos = camera.Position;
+                    state = EditorState.cameramoving;
+                    MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.SizeAll;
+                }
+
                 //MIDDLE MOUSE BUTTON CLICK
                 if ((mstate.MiddleButton == ButtonState.Pressed && oldmstate.MiddleButton == ButtonState.Released) ||
                     (kstate.IsKeyDown(Keys.D2) && oldkstate.IsKeyUp(Keys.D2)))
@@ -838,10 +846,10 @@ namespace GLEED2D
                     if (item != null) item.onMouseOut();
                     if (kstate.IsKeyDown(Keys.LeftControl))
                     {
-                        grabbedpoint = new Vector2(mstate.X, mstate.Y);
-                        initialcampos = camera.Position;
-                        state = EditorState.cameramoving;
-                        MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.SizeAll;
+                        //grabbedpoint = new Vector2(mstate.X, mstate.Y);
+                        //initialcampos = camera.Position;
+                        //state = EditorState.cameramoving;
+                        //MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.SizeAll;
                     }
                     else
                     {
@@ -1022,7 +1030,7 @@ namespace GLEED2D
                 {
                     camera.Position = initialcampos - distance;
                 }
-                if (mstate.MiddleButton == ButtonState.Released)
+                if (mstate.LeftButton == ButtonState.Released)
                 {
                     state = EditorState.idle;
                     MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.Default;
