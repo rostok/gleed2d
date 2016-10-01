@@ -8,6 +8,7 @@ Microsoft Public License
 https://gleed2d.codeplex.com/
 
 # Custom Changes
+* 1.3.0.12 - Photoshop like screen panning (space+left mouse button)
 * 1.3.0.11 - change property values for multiple seleced objects
 * 1.3.0.10 - watch folder for texture changes and reload textures if necessary, stop files locking
 * 1.3.0.9 - add custom property to selected objects switch
