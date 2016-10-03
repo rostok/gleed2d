@@ -36,6 +36,7 @@ namespace GLEED2D
     {
         [XmlIgnore()]
         private Layer _layer;
+        [XmlIgnore()]
         public Layer layer
         {
             get
@@ -46,13 +47,14 @@ namespace GLEED2D
             // this way items can inherit some extra properties with values
             set
             {
-                foreach (String propName in value.CustomProperties.Keys)
-                    if (propName.Substring(0,1)=="+")
+                if (value!=null)
+                foreach (CustomProperty cp in value.CustomProperties.Values)
+                    if (cp.name.Substring(0,1)=="+")
                     {
-                        String propName2 = propName.Substring(1);
+                        String propName2 = cp.name.Substring(1);
                         if (!this.CustomProperties.ContainsKey(propName2))
                         {
-                            this.CustomProperties.Add(propName2, value.CustomProperties[propName].clone());
+                            this.CustomProperties.Add(propName2, cp.clone());
                         }
                     }
                 _layer = value;
