@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Forms = System.Windows.Forms;
 using System.Windows.Forms;
+using System;
 
 namespace GLEED2D
 {
@@ -34,7 +35,29 @@ namespace GLEED2D
     public abstract partial class Item
     {
         [XmlIgnore()]
-        public Layer layer;
+        private Layer _layer;
+        public Layer layer
+        {
+            get
+            {
+                return _layer;
+            }
+            // this setter copies custom properties from layer that start with '+' sign into items moved to that layer
+            // this way items can inherit some extra properties with values
+            set
+            {
+                foreach (String propName in value.CustomProperties.Keys)
+                    if (propName.Substring(0,1)=="+")
+                    {
+                        String propName2 = propName.Substring(1);
+                        if (!this.CustomProperties.ContainsKey(propName2))
+                        {
+                            this.CustomProperties.Add(propName2, value.CustomProperties[propName].clone());
+                        }
+                    }
+                _layer = value;
+            }
+        }
 
         protected bool hovering;
 

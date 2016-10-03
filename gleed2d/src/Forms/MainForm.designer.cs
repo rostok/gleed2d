@@ -190,7 +190,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1084, 482);
+            this.pictureBox1.Size = new System.Drawing.Size(1084, 481);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
@@ -291,7 +291,7 @@
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 5;
-            this.treeView1.Size = new System.Drawing.Size(239, 484);
+            this.treeView1.Size = new System.Drawing.Size(239, 483);
             this.treeView1.TabIndex = 2;
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
@@ -323,7 +323,7 @@
             this.propertyGrid1.Margin = new System.Windows.Forms.Padding(4);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertyGrid1.Size = new System.Drawing.Size(239, 268);
+            this.propertyGrid1.Size = new System.Drawing.Size(239, 269);
             this.propertyGrid1.TabIndex = 3;
             this.propertyGrid1.ToolbarVisible = false;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
@@ -1075,7 +1075,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.propertyGrid1);
             this.splitContainer3.Size = new System.Drawing.Size(243, 794);
-            this.splitContainer3.SplitterDistance = 517;
+            this.splitContainer3.SplitterDistance = 516;
             this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -1086,12 +1086,12 @@
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.treeView1);
             this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(239, 484);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(239, 483);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(239, 513);
+            this.toolStripContainer1.Size = new System.Drawing.Size(239, 512);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -1198,7 +1198,7 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer2.Size = new System.Drawing.Size(1088, 794);
-            this.splitContainer2.SplitterDistance = 486;
+            this.splitContainer2.SplitterDistance = 485;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -1214,7 +1214,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1084, 299);
+            this.tabControl1.Size = new System.Drawing.Size(1084, 300);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -1230,7 +1230,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1055, 291);
+            this.tabPage1.Size = new System.Drawing.Size(1055, 292);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Textures";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1248,7 +1248,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(1055, 249);
+            this.listView1.Size = new System.Drawing.Size(1055, 250);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView1_ItemDrag);
@@ -1339,7 +1339,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1051, 291);
+            this.tabPage2.Size = new System.Drawing.Size(1051, 292);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Primitives";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1363,7 +1363,7 @@
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.ShowItemToolTips = true;
-            this.listView2.Size = new System.Drawing.Size(1043, 283);
+            this.listView2.Size = new System.Drawing.Size(1043, 284);
             this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);

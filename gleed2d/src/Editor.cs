@@ -263,6 +263,7 @@ namespace GLEED2D
             l2.Items.Insert(index2, i1);
             i1.layer = l2;
         }
+
         public void moveSelectedItemsToLayer(Layer chosenlayer)
         {
             if (chosenlayer == SelectedLayer) return;
