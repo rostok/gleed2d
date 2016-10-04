@@ -54,7 +54,9 @@ namespace GLEED2D
                         String propName2 = cp.name.Substring(1);
                         if (!this.CustomProperties.ContainsKey(propName2))
                         {
-                            this.CustomProperties.Add(propName2, cp.clone());
+                                CustomProperty cp2 = cp.clone();
+                                cp2.name = propName2;
+                                this.CustomProperties.Add(propName2, cp2);
                         }
                     }
                 _layer = value;

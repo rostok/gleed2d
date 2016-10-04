@@ -7,3 +7,4 @@
 .vs
 /gleed2d/bin/Debug
 /gleed2d/obj/x86/Debug
+/build.bat
