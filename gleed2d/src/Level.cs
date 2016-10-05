@@ -60,6 +60,26 @@ namespace GLEED2D
             return level;
         }
 
+        public static Level FromString(string input, ContentManager cm)
+        {
+            StringReader sr = new StringReader(input);
+            XmlSerializer serializer = new XmlSerializer(typeof(Level));
+            Level level = (Level)serializer.Deserialize(sr);
+            level.CustomProperties.RestoreItemAssociations(level);
+
+            foreach (Layer layer in level.Layers)
+            {
+                layer.CustomProperties.RestoreItemAssociations(level);
+                foreach (Item item in layer.Items)
+                {
+                    item.CustomProperties.RestoreItemAssociations(level);
+                    item.load(cm);
+                }
+            }
+
+            return level;
+        }
+
         public Item getItemByName(string name)
         {
             foreach (Layer layer in Layers)

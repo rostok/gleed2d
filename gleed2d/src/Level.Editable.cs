@@ -96,6 +96,31 @@ namespace GLEED2D
 
         }
 
+        public String exportToString()
+        {
+            String s = "";
+            foreach (Layer l in Layers)
+            {
+                foreach (Item i in l.Items)
+                {
+                    if (i is TextureItem)
+                    {
+                        TextureItem ti = (TextureItem)i;
+                        ti.texture_filename = RelativePath(ContentRootFolder, ti.texture_fullpath);
+                        ti.asset_name = ti.texture_filename.Substring(0, ti.texture_filename.LastIndexOf('.'));
+                    }
+                }
+            }
+
+            StringWriter writer = new StringWriter();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Level));
+            serializer.Serialize(writer, this);
+
+            writer.Close();
+            return writer.ToString();
+        }
+
 
 
         public string RelativePath(string relativeTo, string pathToTranslate)

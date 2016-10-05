@@ -30,10 +30,11 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.3.0.13")]
+[assembly: AssemblyVersion("1.3.0.14")]
 
 /*
  * rostok's changes
+ * 1.3.0.14 - copy / paste objects between Glee instances
  * 1.3.0.13 - layer properties starting with + are inherited by items in this layer
  * 1.3.0.12 - Photoshop like screen panning (space+left mouse button)
  * 1.3.0.11 - change property values for multiple seleced objects

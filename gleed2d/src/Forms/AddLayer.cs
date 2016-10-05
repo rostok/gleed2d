@@ -15,6 +15,7 @@ namespace GLEED2D
         public AddLayer(MainForm main)
         {
             InitializeComponent();
+            textBox1.Text = "Layer" + (MainForm.Instance.treeView1.Nodes[0].GetNodeCount(false)+1).ToString().PadLeft(2).Replace(" ", "0");
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -39,5 +40,6 @@ namespace GLEED2D
         {
             this.Close();
         }
+
     }
 }

@@ -15,6 +15,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
+using System.Xml.Serialization;
 
 namespace GLEED2D
 {
@@ -1099,6 +1100,123 @@ namespace GLEED2D
                 {
                     selitem.CustomProperties.Add(key, cp.clone());
                 }
+            }
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Editor.Instance.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("select some items first");
+                return;
+            }
+            Level l = new Level();
+            l.ContentRootFolder = Editor.Instance.level.ContentRootFolder;
+            l.Name = "exportLevel";
+            Layer la = new Layer("exportLayer");
+            l.Layers.Add(la);
+            foreach (Item selitem in Editor.Instance.SelectedItems)
+                la.Items.Add(selitem.clone());
+            
+            System.Windows.Forms.Clipboard.SetText(l.exportToString());
+        }
+
+        // http://stackoverflow.com/questions/275689/how-to-get-relative-path-from-absolute-path/32113484#32113484
+        /// <summary>
+        /// Creates a relative path from one file or folder to another.
+        /// </summary>
+        /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+        /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+        /// <returns>The relative path from the start directory to the end path.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="fromPath"/> or <paramref name="toPath"/> is <c>null</c>.</exception>
+        /// <exception cref="UriFormatException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static string GetRelativePath(string fromPath, string toPath)
+        {
+            if (string.IsNullOrEmpty(fromPath))
+            {
+                throw new ArgumentNullException("fromPath");
+            }
+
+            if (string.IsNullOrEmpty(toPath))
+            {
+                throw new ArgumentNullException("toPath");
+            }
+
+            Uri fromUri = new Uri(AppendDirectorySeparatorChar(fromPath));
+            Uri toUri = new Uri(AppendDirectorySeparatorChar(toPath));
+
+            if (fromUri.Scheme != toUri.Scheme)
+            {
+                return toPath;
+            }
+
+            Uri relativeUri = fromUri.MakeRelativeUri(toUri);
+            string relativePath = Uri.UnescapeDataString(relativeUri.ToString());
+
+            if (string.Equals(toUri.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
+            {
+                relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+            }
+
+            return relativePath;
+        }
+
+        private static string AppendDirectorySeparatorChar(string path)
+        {
+            // Append a slash only if the path is a directory and does not have a slash.
+            if (!Path.HasExtension(path) &&
+                !path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                return path + Path.DirectorySeparatorChar;
+            }
+
+            return path;
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Editor.Instance.SelectedLayer==null)
+            {
+                MessageBox.Show("select layer first");
+                return;
+            }
+
+            try
+            {
+                // clear selection
+                Editor.Instance.SelectedItems.Clear();
+                // load level from xml string
+                Level l = Level.FromString(System.Windows.Forms.Clipboard.GetText(), Game1.Instance.Content);
+                l.ContentRootFolder = Editor.Instance.level.ContentRootFolder+GetRelativePath(Editor.Instance.level.ContentRootFolder, l.ContentRootFolder);
+
+                foreach(Item i in l.Layers.First().Items)
+                {
+                    String newName;
+                    int n = 1;
+                    do {
+                        newName = i.Name + "(copy " + n.ToString() + ")";
+                        n++;
+                    } while (Editor.Instance.level.getItemByName(newName) != null);
+                    i.Name = newName;
+
+                    // load textures, and adjust folders
+                    if (i.GetType() == typeof(TextureItem)) ((TextureItem)i).texture_fullpath = l.ContentRootFolder+((TextureItem)i).texture_filename;
+                    i.loadIntoEditor();
+
+                    // add item into layer
+                    Editor.Instance.SelectedLayer.Items.Add(i);
+                    i.layer = Editor.Instance.SelectedLayer;
+                    i.load(Game1.Instance.Content);
+                    // select pasted objects
+                    Editor.Instance.SelectedItems.Add(i);
+                }
+                Editor.Instance.updatetreeview();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("failed to read xml from clipboard");
+                return;
             }
         }
     }

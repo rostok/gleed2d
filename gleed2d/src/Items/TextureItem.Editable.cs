@@ -138,6 +138,7 @@ namespace GLEED2D
         {
             if (layer != null) this.texture_fullpath = System.IO.Path.Combine(layer.level.ContentRootFolder + "\\", texture_filename);
 
+            if (texture_fullpath == null) texture_fullpath = "";
             texture_fullpath = texture_fullpath.Replace("\\\\", "\\");
 
             if (!File.Exists(texture_fullpath))
