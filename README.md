@@ -8,6 +8,7 @@ Microsoft Public License
 https://gleed2d.codeplex.com/
 
 # Custom Changes
+* 1.3.0.15 - increase indexes in names while copying
 * 1.3.0.14 - copy / paste objects between Glee instances
 * 1.3.0.13 - layer properties starting with + are inherited by items in this layer
 * 1.3.0.12 - Photoshop like screen panning (space+left mouse button)
