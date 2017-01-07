@@ -796,7 +796,8 @@ namespace GLEED2D
                         }
                         foreach (Item selitem in selecteditemscopy)
                         {
-                            selitem.Name = selitem.getNamePrefix() + level.getNextItemNumber();
+                            //selitem.Name = selitem.getNamePrefix() + level.getNextItemNumber();
+                            selitem.Name = MainForm.Instance.getUniqueNameBasedOn(selitem.Name);
                             addItem(selitem);
                         }
                         selectitem(selecteditemscopy[0]);

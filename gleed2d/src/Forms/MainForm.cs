@@ -837,12 +837,22 @@ namespace GLEED2D
 
         public string getUniqueNameBasedOn(string name)
         {
-            int i = 0;
-            string newname = "Copy of " + name;
-            while (treeView1.Nodes.Find(newname, true).Length > 0)
-            {
-                newname = "Copy(" + i++.ToString() + ") of " + name;
+            if (name == null || name.Length == 0) return "unnamed";
+
+            int pos = name.Length - 1;
+            int n = 0;
+            int ln = 0;
+            while (pos > 0 && int.TryParse(name.Substring(pos), out n)) {
+                ln = n;
+                pos--;
             }
+            pos++;
+            if (pos < name.Length) name = name.Remove(pos);
+            string newname;
+            do {
+                ln++;
+                newname = name + (ln.ToString());
+            } while (treeView1.Nodes.Find(newname, true).Length > 0);
             return newname;
         }
 
@@ -1192,13 +1202,7 @@ namespace GLEED2D
 
                 foreach(Item i in l.Layers.First().Items)
                 {
-                    String newName;
-                    int n = 1;
-                    do {
-                        newName = i.Name + "(copy " + n.ToString() + ")";
-                        n++;
-                    } while (Editor.Instance.level.getItemByName(newName) != null);
-                    i.Name = newName;
+                    i.Name = getUniqueNameBasedOn(i.Name);
 
                     // load textures, and adjust folders
                     if (i.GetType() == typeof(TextureItem)) ((TextureItem)i).texture_fullpath = l.ContentRootFolder+((TextureItem)i).texture_filename;
