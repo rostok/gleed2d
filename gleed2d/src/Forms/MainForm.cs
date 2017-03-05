@@ -1219,7 +1219,7 @@ namespace GLEED2D
             }
             catch (Exception exc)
             {
-                MessageBox.Show("failed to read xml from clipboard");
+                MessageBox.Show("failed to read xml from clipboard. "+exc.ToString());
                 return;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Collections.Generic;
 using System.Drawing.Design;
 using System.Xml.Serialization;
 using CustomUITypeEditors;
@@ -44,6 +45,21 @@ namespace GLEED2D
             LineColor = Constants.Instance.ColorPrimitives;
         }
 
+        public void removePointByIndex(int index) 
+        {
+            if (index>=0 && index<WorldPoints.Length)
+            {
+                List<Vector2> foos = null;
+                foos = new List<Vector2>(WorldPoints);
+                foos.RemoveAt(index);
+                WorldPoints = foos.ToArray();
+
+                foos = new List<Vector2>(LocalPoints);
+                foos.RemoveAt(index);
+                LocalPoints = foos.ToArray();
+            }
+        }
+
         public override Item clone()
         {
             PathItem result = (PathItem)this.MemberwiseClone();
@@ -78,7 +94,6 @@ namespace GLEED2D
             for (int i = 0; i < WorldPoints.Length; i++) WorldPoints[i] = LocalPoints[i] + Position;
         }
 
-
         public override void onMouseOver(Vector2 mouseworldpos)
         {
             pointundermouse = -1;
@@ -88,7 +103,7 @@ namespace GLEED2D
                 {
                     pointundermouse = i;
                     MainForm.Instance.pictureBox1.Cursor = Cursors.Hand;
-                    MainForm.Instance.toolStripStatusLabel1.Text = Name + " (Point " + i.ToString() + ": " + WorldPoints[i].ToString() + ")";
+                    MainForm.Instance.toolStripStatusLabel1.Text = Name + " (Point " + i.ToString() + ": " + WorldPoints[i].ToString() + ") Shift Click to delete";
                 }
             }
             if (pointundermouse == -1) MainForm.Instance.pictureBox1.Cursor = Cursors.Default;
@@ -105,8 +120,15 @@ namespace GLEED2D
             hovering = false;
             if (pointundermouse >= 0)
             {
-                pointgrabbed = pointundermouse;
-                initialpos = WorldPoints[pointundermouse];
+                if (Control.ModifierKeys == Keys.Shift)
+                {
+                    removePointByIndex(pointundermouse);
+                }
+                else
+                {
+                    pointgrabbed = pointundermouse;
+                    initialpos = WorldPoints[pointundermouse];
+                }
             }
             else MainForm.Instance.pictureBox1.Cursor = Cursors.SizeAll;
             base.onMouseButtonDown(mouseworldpos);

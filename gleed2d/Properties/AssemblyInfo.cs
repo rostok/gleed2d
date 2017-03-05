@@ -30,10 +30,11 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.3.0.15")]
+[assembly: AssemblyVersion("1.3.0.16")]
 
 /*
  * rostok's changes
+ * 1.3.0.16 - delete path points with Shift Click
  * 1.3.0.15 - increase indexes in names while copying
  * 1.3.0.14 - copy / paste objects between Glee instances
  * 1.3.0.13 - layer properties starting with + are inherited by items in this layer

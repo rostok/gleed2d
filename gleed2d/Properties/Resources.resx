@@ -134,7 +134,7 @@
     <value>(Left Click) = start new path      (Right Click) = exit path draw mode</value>
   </data>
   <data name="Path_Started" xml:space="preserve">
-    <value>(Left Click) = next point      (BackSpace) = delete last point      (Middle Click) = add path to level      (Right Click) = cancel path</value>
+    <value>(Left Click or 1) = next point      (BackSpace) = delete last point      (Middle Click or 2) = add path to level      (Right Click or 3) = cancel path</value>
   </data>
   <data name="Rectangle_Entered" xml:space="preserve">
     <value>(Left Click) = start new rectangle      (Right Click) = exit rectangle draw mode</value>

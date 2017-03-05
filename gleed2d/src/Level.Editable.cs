@@ -98,7 +98,7 @@ namespace GLEED2D
 
         public String exportToString()
         {
-            String s = "";
+            //String s = "";
             foreach (Layer l in Layers)
             {
                 foreach (Item i in l.Items)
